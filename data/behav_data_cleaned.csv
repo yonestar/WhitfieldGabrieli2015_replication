@@ -1,0 +1,54 @@
+ID,TxResponder,Group,BaselineLSAS,LSAS_T2,LSASpostCBTall,LSASpostCBTall_LOCF
+1003,43above,CBT Immediate,95,43,43,43
+1007,42andbelow,WL,66,67,15,15
+1011,43above,CBT Immediate,108,49,49,49
+1012,43above,CBT Immediate,106,104,104,104
+1013,,WL,63,71,NaN,NaN
+1014,43above,CBT Immediate,91,NaN,NaN,68
+1015,,CBT Immediate,74,NaN,NaN,46
+1016,42andbelow,CBT Immediate,94,21,21,21
+1017,,CBT Immediate,97,NaN,NaN,NaN
+1018,,CBT Immediate,79,NaN,NaN,NaN
+1019,43above,CBT Immediate,66,52,52,52
+1020,,WL,91,NaN,NaN,NaN
+1021,42andbelow,CBT Immediate,84,42,42,42
+1023,43above,CBT Immediate,73,45,45,45
+1024,,WL,125,110,NaN,NaN
+1025,43above,CBT Immediate,84,NaN,NaN,76
+1026,42andbelow,CBT Immediate,58,17,17,17
+1027,43above,WL,59,44,NaN,60
+1028,43above,WL,75,60,52,52
+1032,42andbelow,CBT Immediate,69,31,31,31
+1035,43above,WL,56,42,44,44
+1038,43above,WL,68,56,57,57
+1039,42andbelow,WL,66,51,41,41
+1043,43above,CBT Immediate,131,82,82,82
+1044,42andbelow,CBT Immediate,99,16,16,16
+1045,,CBT Immediate,72,NaN,NaN,NaN
+1048,42andbelow,WL,91,70,35,35
+1049,43above,WL,94,88,NaN,81
+1050,43above,CBT Immediate,80,NaN,NaN,50
+1051,43above,CBT Immediate,86,52,52,52
+1052,43above,CBT Immediate,79,84,84,84
+1053,43above,WL,95,NaN,NaN,71
+1054,,WL,102,NaN,NaN,NaN
+1056,42andbelow,CBT Immediate,102,NaN,39,39
+1057,,WL,62,71,NaN,NaN
+1060,,CBT Immediate,65,NaN,NaN,NaN
+1061,43above,WL,72,108,108,108
+1063,43above,WL,77,79,79,79
+1065,43above,CBT Immediate,93,NaN,NaN,53
+1066,42andbelow,WL,50,56,26,26
+1067,,CBT Immediate,111,NaN,NaN,NaN
+1070,43above,CBT Immediate,64,52,52,52
+1072,,WL,67,NaN,NaN,NaN
+1073,42andbelow,WL,61,67,29,29
+1074,42andbelow,CBT Immediate,75,35,35,35
+1075,42andbelow,CBT Immediate,72,33,33,33
+1076,43above,WL,110,110,NaN,68
+1077,42andbelow,CBT Immediate,112,7,7,7
+1082,42andbelow,CBT Immediate,71,29,29,29
+1083,43above,WL,60,55,NaN,61
+1084,43above,CBT Immediate,96,74,74,74
+1086,42andbelow,WL,90,74,36,36
+1087,43above,WL,91,65,NaN,93
