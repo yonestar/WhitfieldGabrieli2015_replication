@@ -1,4 +1,4 @@
-# WhitfieldGabrieli2015_replication
+# Whitfield-Gabrieli et al. 2015 -- Independent Replication
 Independent replication attempt of Whitfield-Gabrieli et al. 2015
 
 This repository contains the data and code for the following paper:
