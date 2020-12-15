@@ -7,3 +7,5 @@ Ashar et al. (2021) Brain markers predicting response to cognitive-behavioral th
 An independent replication of Whitfield-Gabrieli et al., 2015  
 
 Code requires MATLAB neuroimaging package https://github.com/canlab/CanlabCore
+
+To reproduce analyses, run the script `scripts/DirectReplication_canlab_tools_v2.m`
