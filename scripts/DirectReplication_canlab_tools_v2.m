@@ -45,11 +45,7 @@ Zpos = fisherz(pos.dat);
 Zneg = mean(fisherz(cat(2,neg.dat)), 2);
 
 % compute AMYG = Zpos - Zneg;
-AMYG = Zpos - Zneg;
-AMYGz = zscore(AMYG);
-
-%save(matfile_fname, 'AMYG', 'AMYGz', 'MVPA', 'MVPAz');
-
+AMYG = Zpos - Zneg; % will get zscored below, after dropping Ps
 
 
 %% make deltaLSAS score -- doing baseline - LOCF, for all Ss. This way change is a positive number, like they did it
@@ -57,6 +53,14 @@ tabl.deltaLSAS = tabl.BaselineLSAS - tabl.LSASpostCBTall_LOCF;
 
 % drop Ss for whom we don't have a delta LSAS. useless
 todrop = isnan(tabl.deltaLSAS);
+
+% ---%%% PAY ATTENTION TO THIS FLAG!!!! ---- %%%%
+% RE-RUN SCRIPT FROM BEGINNING IF CHANGE FLAG -----------------%%%
+CBT_immediate_only = 1;  % for CBT immediate only, no CBT-post-WL
+if CBT_immediate_only
+    todrop = todrop | strcmp(tabl.Group,'WL');
+end
+
 tabl(todrop,:) = [];
 height(tabl)
 
@@ -69,7 +73,7 @@ tabl.BaselineLSAS_mc = tabl.BaselineLSAS - nanmean(tabl.BaselineLSAS);
 tabl.AMYGz = zscore(AMYG(~todrop));
     
 %% test for normality
-
+clc
 [h, p, adstat]=adtest(tabl.deltaLSAS)
 [h, p, adstat]=adtest(tabl.AMYGz)
 [h, p, adstat]=adtest(tabl.BaselineLSAS)
@@ -81,7 +85,7 @@ clc
 % estimated on my data
 mdl_initialLSAS = fitglm(tabl.BaselineLSAS_mc, tabl.deltaLSAS_mc, 'VarNames', {'BaselineLSAS' 'DeltaLSAS'}, 'intercept', false)
 disp(mdl_initialLSAS.Rsquared)
-MSE_full = mdl_initialLSAS.SSE / 42
+MSE_full = mdl_initialLSAS.SSE / height(tabl)
 
 % their param for Initial LSAS
 tabl.pred_deltaLSAS_baselineLSAS = 0.6194*tabl.BaselineLSAS_mc;
@@ -141,12 +145,6 @@ xlabel('Subject #')
 set(gca, 'FontSize', 20)
 
 saveas(gcf, fullfile(figdir, 'Fig1d.png'))
-
-
-%% for CBT immediate only, CBT-postWL only
-% wh = strcmp(tabl.Group,'WL');
-% corr(tabl.pred_deltaLSAS_amy(wh), tabl.deltaLSAS(wh), 'rows', 'complete') ^ 2
-% corr(tabl.pred_deltaLSAS_amy(~wh), tabl.deltaLSAS(~wh), 'rows', 'complete') ^ 2
 
 
 %% Permutation test on whether additional variance explained by Amy is sig
