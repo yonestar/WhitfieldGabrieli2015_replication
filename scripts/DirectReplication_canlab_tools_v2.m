@@ -47,7 +47,6 @@ Zneg = mean(fisherz(cat(2,neg.dat)), 2);
 % compute AMYG = Zpos - Zneg;
 AMYG = Zpos - Zneg; % will get zscored below, after dropping Ps
 
-
 %% make deltaLSAS score -- doing baseline - LOCF, for all Ss. This way change is a positive number, like they did it
 tabl.deltaLSAS = tabl.BaselineLSAS - tabl.LSASpostCBTall_LOCF;
 
@@ -56,7 +55,7 @@ todrop = isnan(tabl.deltaLSAS);
 
 % ---%%% PAY ATTENTION TO THIS FLAG!!!! ---- %%%%
 % RE-RUN SCRIPT FROM BEGINNING IF CHANGE FLAG -----------------%%%
-CBT_immediate_only = 1;  % for CBT immediate only, no CBT-post-WL
+CBT_immediate_only = 0;  % for CBT immediate only, no CBT-post-WL
 if CBT_immediate_only
     todrop = todrop | strcmp(tabl.Group,'WL');
 end
@@ -72,11 +71,13 @@ tabl.BaselineLSAS_mc = tabl.BaselineLSAS - nanmean(tabl.BaselineLSAS);
 % some Ss
 tabl.AMYGz = zscore(AMYG(~todrop));
     
-%% test for normality
+%% baseline and pre to post change in symptom severity, test for normality
 clc
-[h, p, adstat]=adtest(tabl.deltaLSAS)
-[h, p, adstat]=adtest(tabl.AMYGz)
-[h, p, adstat]=adtest(tabl.BaselineLSAS)
+
+x = tabl.LSASpostCBTall_LOCF;
+mean(x), std(x)
+
+[h, p, adstat]=adtest(x)
 
 %% compact model -- predicting deltaLSAS from initialLSAS only
 
@@ -120,7 +121,7 @@ mdl_newPEs.Rsquared
 create_figure('fig 1', 1, 1)
 
 fs = 88;
-scatter(tabl.pred_deltaLSAS_amy , tabl.deltaLSAS_mc, 'b', 'SizeData', fs);
+scatter(tabl.pred_deltaLSAS_amy , tabl.deltaLSAS_mc, 'b', 'SizeData', fs, 'Group', grp);
 scatter(tabl.pred_deltaLSAS_baselineLSAS , tabl.deltaLSAS_mc, 'r', 'SizeData', fs);
 
 h = lsline; set(h(1), 'color', 'b'); set(h(2), 'color', 'r');
@@ -145,6 +146,22 @@ xlabel('Subject #')
 set(gca, 'FontSize', 20)
 
 saveas(gcf, fullfile(figdir, 'Fig1d.png'))
+
+%% scatter by group, for reviewer
+
+grp = strcmp(tabl.Group,'WL');
+create_figure('fig 1 grp', 1, 1)
+
+%gscatter(tabl.pred_deltaLSAS_amy , tabl.deltaLSAS_mc, tabl.Group);
+%title('Compact model')
+
+gscatter(tabl.pred_deltaLSAS_baselineLSAS , tabl.deltaLSAS_mc, tabl.Group);
+title('Full model')
+
+lsline
+set(gca, 'FontSize', 20)
+ylabel('Observed treatment response')
+xlabel('Predicted treatment response')
 
 
 %% Permutation test on whether additional variance explained by Amy is sig
